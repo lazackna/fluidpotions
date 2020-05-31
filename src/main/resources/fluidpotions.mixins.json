@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "me.crupette.fluidpotions.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "BucketItemMixin",
+    "ItemColorsMixin"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

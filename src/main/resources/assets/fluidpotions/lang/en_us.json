@@ -1,0 +1,23 @@
+{
+  "item.fluidpotions.potion_bucket.effect.empty": "Uncraftable Potion Bucket",
+  "item.fluidpotions.potion_bucket.effect.mundane": "Mundane Potion Bucket",
+  "item.fluidpotions.potion_bucket.effect.thick": "Thick Potion Bucket",
+  "item.fluidpotions.potion_bucket.effect.awkward": "Awkward Potion Bucket",
+  "item.fluidpotions.potion_bucket.effect.night_vision": "Bucket of Night Vision",
+  "item.fluidpotions.potion_bucket.effect.invisibility": "Bucket of Invisibility",
+  "item.fluidpotions.potion_bucket.effect.leaping": "Bucket of Leaping",
+  "item.fluidpotions.potion_bucket.effect.fire_resistance": "Bucket of Fire Resistance",
+  "item.fluidpotions.potion_bucket.effect.swiftness": "Bucket of Swiftness",
+  "item.fluidpotions.potion_bucket.effect.slowness": "Bucket of Slowness",
+  "item.fluidpotions.potion_bucket.effect.water_breathing": "Bucket of Water Breathing",
+  "item.fluidpotions.potion_bucket.effect.healing": "Bucket of Healing",
+  "item.fluidpotions.potion_bucket.effect.harming": "Bucket of Harming",
+  "item.fluidpotions.potion_bucket.effect.poison": "Bucket of Poison",
+  "item.fluidpotions.potion_bucket.effect.regeneration": "Bucket of Regeneration",
+  "item.fluidpotions.potion_bucket.effect.strength": "Bucket of Strength",
+  "item.fluidpotions.potion_bucket.effect.weakness": "Bucket of Weakness",
+  "item.fluidpotions.potion_bucket.effect.levitation": "Bucket of Levitation",
+  "item.fluidpotions.potion_bucket.effect.luck": "Bucket of Luck",
+  "item.fluidpotions.potion_bucket.effect.turtle_master": "Bucket of the Turtle Master",
+  "item.fluidpotions.potion_bucket.effect.slow_falling": "Bucket of Slow Falling"
+}

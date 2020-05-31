@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "fluidpotions",
+  "version": "${version}",
+  "name": "Fluid Potions",
+  "description": "Looks through the potion registry and adds each potion as it's own unique fluid.",
+  "authors": [
+    "Crupette"
+  ],
+  "contributors": [],
+  "contact": {
+    "sources": "https://github.com/Crupette/fluidpotions"
+  },
+  "license": "MIT",
+  "icon": "assets/fluidpotions/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.crupette.fluidpotions.FluidPotions"
+    ],
+    "client": [
+      "me.crupette.fluidpotions.client.FluidPotionsClient"
+    ],
+    "server": []
+  },
+  "mixins": [
+    "fluidpotions.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.4.0"
+  }
+}
