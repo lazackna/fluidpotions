@@ -69,7 +69,7 @@ curseforge {
 		apiKey = ''
 	}
 	project {
-		id = '386947'
+		id = '387189'
 		changelog = project.changelog
 		releaseType = 'release'
 		addGameVersion '1.16-Snapshot'
