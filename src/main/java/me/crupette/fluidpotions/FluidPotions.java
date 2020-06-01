@@ -35,52 +35,51 @@ public class FluidPotions implements ModInitializer {
     public static final String MOD_ID = "fluidpotions";
     public static final String MOD_NAME = "Fluid Potions";
 
-    private Map<Identifier, PotionFluid> stillFluids = new HashMap<>();
-    private Map<Identifier, PotionFluid> flowingFluids = new HashMap<>();
-    private Map<Identifier, PotionBucketItem> bucketItems = new HashMap<>();
-    private Map<Identifier, PotionFluidBlock> fluidBlocks = new HashMap<>();
-    private List<Potion> registeredPotions = new ArrayList<>();
+    private static Map<Identifier, PotionFluid> stillFluids = new HashMap<>();
+    private static Map<Identifier, PotionFluid> flowingFluids = new HashMap<>();
+    private static Map<Identifier, PotionBucketItem> bucketItems = new HashMap<>();
+    private static Map<Identifier, PotionFluidBlock> fluidBlocks = new HashMap<>();
+    private static List<Potion> registeredPotions = new ArrayList<>();
 
     public static FluidPotions INSTANCE = null;
-    public static PotionBucketItem POTION_BUCKET = new PotionBucketItem(new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(ItemGroup.BREWING));
+    public static PotionBucketItem POTION_BUCKET = Registry.register(Registry.ITEM, new Identifier(MOD_ID, "potion_bucket"), new PotionBucketItem(new Item.Settings().recipeRemainder(Items.BUCKET).maxCount(1).group(ItemGroup.BREWING)));
 
     @Override
     public void onInitialize() {
         INSTANCE = this;
-
-        Registry.register(Registry.ITEM, new Identifier(MOD_ID, "potion_bucket"), POTION_BUCKET);
-
-        for(Potion potion : Registry.POTION.stream().collect(Collectors.toSet())){
-            if(potion.equals(Potions.WATER)) continue;
-            Identifier potionId = Registry.POTION.getId(potion);
-            stillFluids.put(potionId, Registry.register(
-                    Registry.FLUID, new Identifier(MOD_ID, potionId.getPath()), new PotionFluidGenerated.Still(potion)));
-            flowingFluids.put(potionId, Registry.register(
-                    Registry.FLUID, new Identifier(MOD_ID, potionId.getPath() + "_flowing"), new PotionFluidGenerated.Flowing(potion)));
-            bucketItems.put(potionId, POTION_BUCKET);
-            fluidBlocks.put(potionId, Registry.register(
-                    Registry.BLOCK, new Identifier(MOD_ID, potionId.getPath()), new PotionFluidBlock(potion, getStill(potion), FabricBlockSettings.copy(Blocks.WATER).build())));
-            registeredPotions.add(potion);
-        }
     }
 
-    public PotionFluid getStill(Potion potion){
+    public static void registerPotion(Identifier id, Potion potion){
+        if(Registry.POTION.getId(potion).compareTo(new Identifier("water")) == 0) return;
+        Identifier potionId = Registry.POTION.getId(potion);
+        stillFluids.put(potionId, Registry.register(
+                Registry.FLUID, new Identifier(MOD_ID, potionId.getPath()), new PotionFluidGenerated.Still(potion)));
+        flowingFluids.put(potionId, Registry.register(
+                Registry.FLUID, new Identifier(MOD_ID, potionId.getPath() + "_flowing"), new PotionFluidGenerated.Flowing(potion)));
+        bucketItems.put(potionId, POTION_BUCKET);
+        fluidBlocks.put(potionId, Registry.register(
+                Registry.BLOCK, new Identifier(MOD_ID, potionId.getPath()), new PotionFluidBlock(potion, getStill(potion), FabricBlockSettings.copy(Blocks.WATER).build())));
+        registeredPotions.add(potion);
+        LOGGER.info("Added potion fluids for " + Registry.POTION.getId(potion));
+    }
+
+    public static PotionFluid getStill(Potion potion){
         return stillFluids.get(Registry.POTION.getId(potion));
     }
 
-    public PotionFluid getFlowing(Potion potion){
+    public static PotionFluid getFlowing(Potion potion){
         return flowingFluids.get(Registry.POTION.getId(potion));
     }
 
-    public PotionBucketItem getBucketItem(Potion potion){
+    public static PotionBucketItem getBucketItem(Potion potion){
         return bucketItems.get(Registry.POTION.getId(potion));
     }
 
-    public PotionFluidBlock getFluidBlock(Potion potion){
+    public static PotionFluidBlock getFluidBlock(Potion potion){
         return fluidBlocks.get(Registry.POTION.getId(potion));
     }
 
-    public ImmutableList<Potion> getRegisteredPotions(){
-        return ImmutableList.copyOf(this.registeredPotions);
+    public static ImmutableList<Potion> getRegisteredPotions(){
+        return ImmutableList.copyOf(registeredPotions);
     }
 }
