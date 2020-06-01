@@ -48,12 +48,12 @@ public class PotionBucketItem extends Item {
     }
 
     public static PotionFluid getPotionFluid(ItemStack stack){
-        return FluidPotions.INSTANCE.getStill(PotionUtil.getPotion(stack));
+        return FluidPotions.getStill(PotionUtil.getPotion(stack));
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        PotionFluid fluid = FluidPotions.INSTANCE.getStill(PotionUtil.getPotion(itemStack));
+        PotionFluid fluid = FluidPotions.getStill(PotionUtil.getPotion(itemStack));
         BlockHitResult hitResult = rayTrace(world, user, RayTraceContext.FluidHandling.NONE);
         if (hitResult.getType() == HitResult.Type.MISS) {
             return TypedActionResult.pass(itemStack);
@@ -139,7 +139,7 @@ public class PotionBucketItem extends Item {
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
         if (this.isIn(group)) {
 
-            for (Potion potion : FluidPotions.INSTANCE.getRegisteredPotions()) {
+            for (Potion potion : FluidPotions.getRegisteredPotions()) {
                 if (potion != Potions.EMPTY) {
                     stacks.add(PotionUtil.setPotion(new ItemStack(this), potion));
                 }
