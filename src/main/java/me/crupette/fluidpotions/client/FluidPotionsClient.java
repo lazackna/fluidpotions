@@ -3,6 +3,8 @@ package me.crupette.fluidpotions.client;
 import me.crupette.fluidpotions.FluidPotions;
 import me.crupette.fluidpotions.fluid.PotionFluid;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandler;
 import net.fabricmc.fabric.api.client.render.fluid.v1.FluidRenderHandlerRegistry;
 import net.fabricmc.fabric.api.event.client.ClientSpriteRegistryCallback;
@@ -33,6 +35,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.function.Function;
 
+@Environment(EnvType.CLIENT)
 public class FluidPotionsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
@@ -55,7 +58,7 @@ public class FluidPotionsClient implements ClientModInitializer {
 
         @Override
         public void apply(ResourceManager manager) {
-            for(Potion potion : FluidPotions.INSTANCE.getRegisteredPotions()){
+            for(Potion potion : FluidPotions.getRegisteredPotions()){
                 FluidRenderHandler potionFluidRenderHandler = new FluidRenderHandler() {
                     @Override
                     public Sprite[] getFluidSprites(BlockRenderView blockRenderView, BlockPos blockPos, FluidState fluidState) {
@@ -74,8 +77,9 @@ public class FluidPotionsClient implements ClientModInitializer {
 
 
 
-                FluidRenderHandlerRegistry.INSTANCE.register(FluidPotions.INSTANCE.getStill(potion), potionFluidRenderHandler);
-                FluidRenderHandlerRegistry.INSTANCE.register(FluidPotions.INSTANCE.getFlowing(potion), potionFluidRenderHandler);
+                FluidRenderHandlerRegistry.INSTANCE.register(FluidPotions.getStill(potion), potionFluidRenderHandler);
+                FluidRenderHandlerRegistry.INSTANCE.register(FluidPotions.getFlowing(potion), potionFluidRenderHandler);
+                FluidPotions.LOGGER.info("Added " + FluidPotions.getStill(potion) + " to fluid render handler registry");
             }
         }
     }
