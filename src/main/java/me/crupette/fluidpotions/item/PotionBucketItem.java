@@ -96,7 +96,7 @@ public class PotionBucketItem extends Item {
             boolean bl = blockState.canBucketPlace(fluid);
             boolean bl2 = blockState.isAir() || bl || block instanceof FluidFillable && ((FluidFillable)block).canFillWithFluid(world, pos, blockState, fluid);
             if (!bl2) {
-                return blockHitResult != null && this.placeFluid(fluid, player, world, blockHitResult.getBlockPos().offset(blockHitResult.getSide()), (BlockHitResult)null);
+                return blockHitResult != null && this.placeFluid(fluid, player, world, blockHitResult.getBlockPos().offset(blockHitResult.getSide()), null);
             } else if (world.getDimension().isUltrawarm() && fluid.isIn(FluidTags.WATER)) {
                 int i = pos.getX();
                 int j = pos.getY();
