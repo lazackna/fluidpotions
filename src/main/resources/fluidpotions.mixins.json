@@ -4,10 +4,11 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BucketItemMixin",
-    "ItemColorsMixin",
     "PotionRegistryMixin"
   ],
-  "client": [],
+  "client": [
+    "ItemColorsMixin"
+  ],
   "server": [],
   "injectors": {
     "defaultRequire": 1
