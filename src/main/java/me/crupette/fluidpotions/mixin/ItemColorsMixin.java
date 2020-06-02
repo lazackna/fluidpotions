@@ -1,18 +1,20 @@
 package me.crupette.fluidpotions.mixin;
 
 import me.crupette.fluidpotions.FluidPotions;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.color.block.BlockColors;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.potion.PotionUtil;
-import net.minecraft.resource.SynchronousResourceReloadListener;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
+@Environment(EnvType.CLIENT)
 @Mixin(ItemColors.class)
-public class ItemColorsMixin {
+public abstract class ItemColorsMixin {
     
     @Inject(
             method = "create(Lnet/minecraft/client/color/block/BlockColors;)Lnet/minecraft/client/color/item/ItemColors;",

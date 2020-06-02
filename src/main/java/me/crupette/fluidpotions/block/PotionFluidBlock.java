@@ -7,17 +7,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.fluid.BaseFluid;
-import net.minecraft.fluid.Fluid;
 import net.minecraft.potion.Potion;
-import net.minecraft.tag.FluidTags;
-import net.minecraft.tag.RegistryTagContainer;
-import net.minecraft.tag.RegistryTagManager;
-import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PotionFluidBlock extends FluidBlock {

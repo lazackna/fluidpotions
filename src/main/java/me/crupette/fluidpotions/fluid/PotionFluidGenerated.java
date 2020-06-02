@@ -8,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.potion.Potion;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
-import net.minecraft.state.property.Property;
 
 public abstract class PotionFluidGenerated extends PotionFluid{
     protected PotionFluidGenerated(Potion potion) {
@@ -17,22 +16,22 @@ public abstract class PotionFluidGenerated extends PotionFluid{
 
     @Override
     public Fluid getFlowing() {
-        return FluidPotions.INSTANCE.getFlowing(potion);
+        return FluidPotions.getFlowing(potion);
     }
 
     @Override
     public Fluid getStill() {
-        return FluidPotions.INSTANCE.getStill(potion);
+        return FluidPotions.getStill(potion);
     }
 
     @Override
     public Item getBucketItem() {
-        return FluidPotions.INSTANCE.getBucketItem(potion);
+        return FluidPotions.getBucketItem(potion);
     }
 
     @Override
     protected BlockState toBlockState(FluidState state) {
-        return FluidPotions.INSTANCE.getFluidBlock(potion).getDefaultState().with(Properties.LEVEL_15, method_15741(state));
+        return FluidPotions.getFluidBlock(potion).getDefaultState().with(Properties.LEVEL_15, method_15741(state));
     }
 
 

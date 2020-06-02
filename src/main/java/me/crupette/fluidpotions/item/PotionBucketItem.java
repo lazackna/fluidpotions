@@ -6,7 +6,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.advancement.criterion.Criterions;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.FluidDrainable;
 import net.minecraft.block.FluidFillable;
 import net.minecraft.block.Material;
 import net.minecraft.client.item.TooltipContext;
@@ -14,7 +13,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.BaseFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.Fluids;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtil;
@@ -33,12 +35,10 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.RayTraceContext;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class PotionBucketItem extends Item {
@@ -52,7 +52,7 @@ public class PotionBucketItem extends Item {
     }
 
     public static PotionFluid getPotionFluid(ItemStack stack){
-        return FluidPotions.INSTANCE.getStill(PotionUtil.getPotion(stack));
+        return FluidPotions.getStill(PotionUtil.getPotion(stack));
     }
 
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
@@ -144,7 +144,7 @@ public class PotionBucketItem extends Item {
     public void appendStacks(ItemGroup group, DefaultedList<ItemStack> stacks) {
         if (this.isIn(group)) {
 
-            for(Potion potion : FluidPotions.INSTANCE.getRegisteredPotions()) {
+            for(Potion potion : FluidPotions.getRegisteredPotions()) {
                 if (potion != Potions.EMPTY) {
                     stacks.add(PotionUtil.setPotion(new ItemStack(this), potion));
                 }
