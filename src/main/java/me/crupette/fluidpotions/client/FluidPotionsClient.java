@@ -68,7 +68,6 @@ public class FluidPotionsClient implements ClientModInitializer {
 
                 FluidRenderHandlerRegistry.INSTANCE.register(FluidPotions.getStill(potion), potionFluidRenderHandler);
                 FluidRenderHandlerRegistry.INSTANCE.register(FluidPotions.getFlowing(potion), potionFluidRenderHandler);
-                FluidPotions.LOGGER.info("Added " + FluidPotions.getStill(potion) + " to fluid render handler registry");
             }
         }
     }

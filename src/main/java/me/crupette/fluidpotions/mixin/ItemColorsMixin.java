@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
-@Environment(EnvType.CLIENT)
 @Mixin(ItemColors.class)
+@Environment(EnvType.CLIENT)
 public abstract class ItemColorsMixin {
     
     @Inject(

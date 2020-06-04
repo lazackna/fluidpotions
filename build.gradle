@@ -28,6 +28,8 @@ dependencies {
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	modRuntime "io.github.Crupette:cauldronoverhaul:master-SNAPSHOT"
 }
 
 processResources {
@@ -72,7 +74,7 @@ curseforge {
 		id = '387189'
 		changelog = project.changelog
 		releaseType = 'release'
-		addGameVersion '1.15.2'
+		addGameVersion '1.16-Snapshot'
 		addGameVersion 'Java 8'
 		addGameVersion 'Fabric'
 		relations {

@@ -41,7 +41,6 @@ public class FluidPotions implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        INSTANCE = this;
     }
 
     public static void registerPotion(Identifier id, Potion potion){
