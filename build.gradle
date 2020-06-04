@@ -29,7 +29,7 @@ dependencies {
 
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	modRuntime "io.github.Crupette:cauldronoverhaul:master-SNAPSHOT"
+	modRuntime "io.github.Crupette:cauldronoverhaul:1.15.2-SNAPSHOT"
 }
 
 processResources {

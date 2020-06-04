@@ -13,6 +13,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.potion.Potion;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.tag.FluidTags;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
@@ -69,5 +71,11 @@ public abstract class PotionFluid extends BaseFluid {
     @Override
     protected float getBlastResistance() {
         return 100.f;
+    }
+
+    @Override
+    public boolean matches(Tag<Fluid> tag) {
+        if(tag.equals(FluidTags.WATER)) return true;
+        return super.matches(tag);
     }
 }
