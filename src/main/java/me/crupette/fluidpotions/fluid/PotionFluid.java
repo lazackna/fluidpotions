@@ -7,6 +7,8 @@ import net.minecraft.fluid.FlowableFluid;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.potion.Potion;
+import net.minecraft.tag.FluidTags;
+import net.minecraft.tag.Tag;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.BlockView;
@@ -62,5 +64,10 @@ public abstract class PotionFluid extends FlowableFluid {
     @Override
     protected float getBlastResistance() {
         return 100.f;
+    }
+
+    @Override
+    public boolean isIn(Tag<Fluid> tag) {
+        return tag.equals(FluidTags.WATER);
     }
 }
