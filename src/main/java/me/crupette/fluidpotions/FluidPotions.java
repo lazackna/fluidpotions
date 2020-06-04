@@ -7,11 +7,14 @@ import me.crupette.fluidpotions.fluid.PotionFluidGenerated;
 import me.crupette.fluidpotions.item.PotionBucketItem;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Blocks;
+import net.minecraft.data.server.FluidTagsProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
@@ -41,7 +44,6 @@ public class FluidPotions implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        INSTANCE = this;
     }
 
     public static void registerPotion(Identifier id, Potion potion){
