@@ -27,9 +27,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-	//modRuntime "io.github.Crupette:cauldronoverhaul:master-SNAPSHOT"
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 }
 
 processResources {
@@ -71,10 +69,10 @@ curseforge {
 		apiKey = ''
 	}
 	project {
-		id = '387189'
+		id = '388777'
 		changelog = project.changelog
-		releaseType = 'release'
-		addGameVersion '1.16-Snapshot'
+		releaseType = 'beta'
+		addGameVersion '1.16'
 		addGameVersion 'Java 8'
 		addGameVersion 'Fabric'
 		relations {
@@ -109,6 +107,12 @@ publishing {
 				builtBy remapSourcesJar
 			}
 		}
+	}
+
+	// select the repositories you want to publish to
+	repositories {
+		// uncomment to publish to the local maven
+		// mavenLocal()
 	}
 }
 
