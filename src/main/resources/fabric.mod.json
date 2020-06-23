@@ -27,6 +27,7 @@
     "fluidpotions.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.4.0"
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
   }
 }
