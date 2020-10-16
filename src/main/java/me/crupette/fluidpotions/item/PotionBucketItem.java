@@ -31,7 +31,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.RayTraceContext;
+import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldAccess;
 
@@ -42,9 +42,8 @@ public class PotionBucketItem extends Item {
         super(settings);
     }
 
-    @Environment(EnvType.CLIENT)
-    public ItemStack getStackForRender() {
-        return PotionUtil.setPotion(super.getStackForRender(), Potions.HEALING);
+    public ItemStack getDefaultStack() {
+        return PotionUtil.setPotion(super.getDefaultStack(), Potions.HEALING);
     }
 
     public static PotionFluid getPotionFluid(ItemStack stack){
@@ -54,7 +53,7 @@ public class PotionBucketItem extends Item {
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
         PotionFluid fluid = FluidPotions.getStill(PotionUtil.getPotion(itemStack));
-        BlockHitResult hitResult = rayTrace(world, user, RayTraceContext.FluidHandling.NONE);
+        BlockHitResult hitResult = raycast(world, user, RaycastContext.FluidHandling.NONE);
         if (hitResult.getType() == HitResult.Type.MISS) {
             return TypedActionResult.pass(itemStack);
         } else if (hitResult.getType() != HitResult.Type.BLOCK) {
@@ -72,7 +71,7 @@ public class PotionBucketItem extends Item {
                     }
 
                     user.incrementStat(Stats.USED.getOrCreateStat(this));
-                    return TypedActionResult.method_29237(this.getEmptiedStack(itemStack, user), world.isClient());
+                    return TypedActionResult.success(this.getEmptiedStack(itemStack, user), world.isClient());
                 }
             } else {
                 return TypedActionResult.fail(itemStack);

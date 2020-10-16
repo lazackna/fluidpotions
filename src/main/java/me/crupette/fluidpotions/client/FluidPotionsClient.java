@@ -52,8 +52,8 @@ public class FluidPotionsClient implements ClientModInitializer {
                     @Override
                     public Sprite[] getFluidSprites(BlockRenderView blockRenderView, BlockPos blockPos, FluidState fluidState) {
                         return new Sprite[] {
-                                MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEX).apply(WATER_STILL_SPRITE_ID),
-                                MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEX).apply(WATER_FLOWING_SPRITE_ID)};
+                                MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).apply(WATER_STILL_SPRITE_ID),
+                                MinecraftClient.getInstance().getSpriteAtlas(SpriteAtlasTexture.BLOCK_ATLAS_TEXTURE).apply(WATER_FLOWING_SPRITE_ID)};
                     }
 
                     @Override
@@ -63,8 +63,6 @@ public class FluidPotionsClient implements ClientModInitializer {
 
 
                 };
-
-
 
                 FluidRenderHandlerRegistry.INSTANCE.register(FluidPotions.getStill(potion), potionFluidRenderHandler);
                 FluidRenderHandlerRegistry.INSTANCE.register(FluidPotions.getFlowing(potion), potionFluidRenderHandler);
