@@ -6,6 +6,7 @@ import me.crupette.fluidpotions.fluid.PotionFluid;
 import me.crupette.fluidpotions.fluid.PotionFluidGenerated;
 import me.crupette.fluidpotions.item.PotionBucketItem;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.registry.RegistryEntryAddedCallback;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tag.TagRegistry;
 import net.minecraft.block.Blocks;
@@ -14,6 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
 import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -44,20 +46,26 @@ public class FluidPotions implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        Registry.POTION.forEach(potion -> {
+            registerPotion(Registry.POTION.getId(potion), potion);
+        });
+        RegistryEntryAddedCallback.event(Registry.POTION).register((i, identifier, potion) -> {
+            System.out.println("Callback registration for potion " + identifier);
+            FluidPotions.registerPotion(identifier, potion);
+        });
     }
 
     public static void registerPotion(Identifier id, Potion potion){
         if(Registry.POTION.getId(potion).compareTo(new Identifier("water")) == 0) return;
-        Identifier potionId = Registry.POTION.getId(potion);
-        stillFluids.put(potionId, Registry.register(
-                Registry.FLUID, new Identifier(MOD_ID, potionId.getPath()), new PotionFluidGenerated.Still(potion)));
-        flowingFluids.put(potionId, Registry.register(
-                Registry.FLUID, new Identifier(MOD_ID, potionId.getPath() + "_flowing"), new PotionFluidGenerated.Flowing(potion)));
-        bucketItems.put(potionId, POTION_BUCKET);
-        fluidBlocks.put(potionId, Registry.register(
-                Registry.BLOCK, new Identifier(MOD_ID, potionId.getPath()), new PotionFluidBlock(potion, getStill(potion), FabricBlockSettings.copy(Blocks.WATER))));
+        stillFluids.put(id, Registry.register(
+                Registry.FLUID, new Identifier(MOD_ID, id.getPath()), new PotionFluidGenerated.Still(potion)));
+        flowingFluids.put(id, Registry.register(
+                Registry.FLUID, new Identifier(MOD_ID, id.getPath() + "_flowing"), new PotionFluidGenerated.Flowing(potion)));
+        bucketItems.put(id, POTION_BUCKET);
+        fluidBlocks.put(id, Registry.register(
+                Registry.BLOCK, new Identifier(MOD_ID, id.getPath()), new PotionFluidBlock(potion, getStill(potion), FabricBlockSettings.copy(Blocks.WATER))));
         registeredPotions.add(potion);
-        LOGGER.info("Added potion fluids for " + Registry.POTION.getId(potion));
+        LOGGER.info("Added potion fluids for " + id);
     }
 
     public static PotionFluid getStill(Potion potion){

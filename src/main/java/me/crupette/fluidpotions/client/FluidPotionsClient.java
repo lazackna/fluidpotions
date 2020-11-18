@@ -1,6 +1,10 @@
 package me.crupette.fluidpotions.client;
 
+import com.swordglowsblue.artifice.api.Artifice;
+import com.swordglowsblue.artifice.api.ArtificeResourcePack;
 import me.crupette.fluidpotions.FluidPotions;
+import me.crupette.fluidpotions.block.PotionFluidBlock;
+import me.crupette.fluidpotions.fluid.PotionFluid;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,16 +23,34 @@ import net.minecraft.resource.ResourceManager;
 import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.BlockRenderView;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Map;
 
 @Environment(EnvType.CLIENT)
 public class FluidPotionsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ResourceManagerHelper.get(ResourceType.CLIENT_RESOURCES).registerReloadListener(new ResourceReloadListener());
+
+        ArtificeResourcePack resourcePack = Artifice.registerAssets(FluidPotions.MOD_ID, pack -> {
+            pack.setDisplayName(FluidPotions.MOD_NAME);
+            pack.setDescription("Holds the block descriptions for all the fluid potions");
+
+            FluidPotions.getRegisteredPotions().forEach(potion -> {
+                PotionFluidBlock potionBlock = FluidPotions.getFluidBlock(potion);
+                Identifier potionId = Registry.BLOCK.getId(potionBlock);
+
+                pack.addBlockState(potionId, state -> {
+                    state.variant("", settings -> {
+                        settings.model(new Identifier("block/water"));
+                    });
+                });
+            });
+        });
     }
 
     public static class ResourceReloadListener implements SimpleSynchronousResourceReloadListener {

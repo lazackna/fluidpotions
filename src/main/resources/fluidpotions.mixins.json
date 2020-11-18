@@ -3,8 +3,7 @@
   "package": "me.crupette.fluidpotions.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "BucketItemMixin",
-    "PotionRegistryMixin"
+    "BucketItemMixin"
   ],
   "client": [
     "ItemColorsMixin"
